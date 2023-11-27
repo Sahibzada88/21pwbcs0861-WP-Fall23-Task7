@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Handling with Express</title>
+</head>
+<body>
+    <h1>Email Content</h1>
+    <pre id="email-content"></pre>
+    <button onclick="sendEmail()">Send Email</button>
+    <div id="notification"></div>
+
+    <script>
+        // Display email content on the webpage
+        document.getElementById('email-content').innerText = `Email Content:\n${emailContent}`;
+
+        // Function to send email
+        function sendEmail() {
+            fetch('/send-email')
+                .then(response => response.text())
+                .then(message => {
+                    // Display the notification message
+                    document.getElementById('notification').innerText = message;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Display error messages
+                    document.getElementById('notification').innerText = 'Error sending email.';
+                });
+        }
+    </script>
+</body>
+</html>
